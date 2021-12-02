@@ -6,9 +6,12 @@
 </head>
 <body>
 
+<a href="{% url 'secrets_share:index' %}">Go Home</a>
+
 <form method="post">{% csrf_token %}
     <legend><h1>Message Form</h1></legend>
     {{ form.as_p }}
+    Password: <input type="text" name="password">
     <input type="submit" value="Submit">
 </form>
 

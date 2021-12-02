@@ -10,15 +10,13 @@ class IndexView(generic.TemplateView):
     template_name = 'secrets_share/index.html'
 
 
-# class DetailView(generic.DetailView):
-#     model = Message
-#     template_name = 'secrets_share/detail.html'
-
-
 def detail(request, hash_id):
     for m in Message.objects.all():
         if m.get_hash_id() == hash_id:
-            return render(request, 'secrets_share/detail.html', context={'message': m})
+            context = {
+                'message': m
+            }
+            return render(request, 'secrets_share/detail.html', context)
 
     raise Http404("No such message")
 
@@ -39,5 +37,6 @@ class SubmitView(generic.CreateView):
 
             return render(request, 'secrets_share/submit.html')
         else:
-            message.save()
+            password = request.POST['password']  # TODO Add validation if password is empty
+            message.save(password=password)
             return HttpResponseRedirect(reverse('secrets_share:detail_hash', args=(message.get_hash_id(),)))

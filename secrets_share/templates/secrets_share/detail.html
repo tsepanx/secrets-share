@@ -6,12 +6,12 @@
 </head>
 <body>
 
-<h1>id: {{ message.id }}</h1>
-<h3>{{ message.title }}</h3>
-Text:
-<p>{{ message.text }}</p>
-{{ message.submit_date }}
-<p>{{ message.get_hash_id }}</p>
+<a href="{% url 'secrets_share:index' %}">Go Home</a>
+
+<h3><a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">Message Permalink</a></h3>
+
+<p>Text: {{ message.text }}</p>
+<p>Date created: {{ message.submit_date }}</p>
 
 </body>
 </html>
