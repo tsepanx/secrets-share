@@ -1,26 +1,17 @@
-Title: {{ message.title }}
-Text: {{ message.text }}
-Submit Date: {{ message.submit_date }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+</head>
+<body>
 
-{#<form action="{% url 'polls:vote' question.id %}" method="post">#}
-{#{% csrf_token %}#}
-{#    <fieldset>#}
-{#        <legend><h1>{{ question.question_text }}</h1></legend>#}
-{#        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}#}
-{#            {% for c in question.choice_set.all %}#}
-{#                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ c.id }}">#}
-{#                <label for="choice{{ forloop.counter }}">{{ c.choice_text }}</label><br>#}
-{#            {% endfor %}#}
-{#    </fieldset>#}
-{#    <input type="submit" value="Voteeed">#}
-{#</form>#}
+<h1>id: {{ message.id }}</h1>
+<h3>{{ message.title }}</h3>
+Text:
+<p>{{ message.text }}</p>
+{{ message.submit_date }}
+<p>{{ message.get_hash_id }}</p>
 
-{#<ul>#}
-{#    <li>Text: {{ question.question_text }}</li>#}
-{#    <li>Choices:#}
-{#        <ul>#}
-{##}
-{#                <li>{{ c.choice_text }},  {{ c.votes }}</li>#}
-{#        </ul>#}
-{#    </li>#}
-{#</ul>#}
+</body>
+</html>

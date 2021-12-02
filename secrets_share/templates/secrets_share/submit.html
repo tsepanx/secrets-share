@@ -6,19 +6,10 @@
 </head>
 <body>
 
-{#<form method="post"> {% csrf_token %}#}
-{#    <fieldset>#}
-{#        <legend><h1>Message Form</h1></legend>#}
-{#        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}#}
-{#                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ c.id }}">#}
-{#                <label for="choice{{ forloop.counter }}">{{ c.choice_text }}</label><br>#}
-{#    </fieldset>#}
-{#    <input type="submit" value="Voteeed">#}
-{#</form>#}
-
 <form method="post">{% csrf_token %}
+    <legend><h1>Message Form</h1></legend>
     {{ form.as_p }}
-    <input type="submit" value="Save">
+    <input type="submit" value="Submit">
 </form>
 
 </body>
