@@ -11,14 +11,21 @@
 
 <a href="{% url 'secrets_share:index' %}">Go Home</a>
 
-<p>Message Permalink: <a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">{% url 'secrets_share:detail_hash' message.get_hash_id %}</a></p>
+<p>Message Permalink: <a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">{{ message.get_hash_id }}</a></p>
 
 <p>Date created: {{ message.submit_date }}</p>
 
 {% if not decrypted_text %}
-<p><a href="{% url 'secrets_share:decrypt' message.get_hash_id %}">Decrypt message</a></p>
+<form method="post">{% csrf_token %}
+    <legend><h3>Decrypt message</h3></legend>
+    {% if error_message %}
+        <b><p>{{ error_message }}</p></b>
+    {% endif %}
+    Password: <input type="password" name="password" required="">
+    <input type="submit" value="Decrypt">
+</form>
 {% else %}
-    Decrypted text: <div class="message-text"><i>{{ decrypted_text }}</i></div>
+    <h3>Decrypted text</h3><div class="message-text"><i>{{ decrypted_text }}</i></div>
 {% endif %}
 
 </body>

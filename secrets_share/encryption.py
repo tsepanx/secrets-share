@@ -60,19 +60,21 @@ def decrypt(string, password):
         to_pad = string[0]
         return string[1:-to_pad]
 
-    string = decode_b64(string)
+    try:
+        string = decode_b64(string)
 
-    password = password.encode()
-    key = password_to_key(password)
+        password = password.encode()
+        key = password_to_key(password)
 
-    # extract the IV from the beginning
-    IV = string[:AES.block_size]
-    decryptor = AES.new(key, AES.MODE_CBC, IV)
+        # extract the IV from the beginning
+        IV = string[:AES.block_size]
+        decryptor = AES.new(key, AES.MODE_CBC, IV)
 
-    string = decryptor.decrypt(string[AES.block_size:])
-    result = unpad_string(string)
-    return result.decode()
-    # return string
+        string = decryptor.decrypt(string[AES.block_size:])
+        result = unpad_string(string)
+        return result.decode()
+    except Exception:
+        return None
 
 
 if __name__ == "__main__":

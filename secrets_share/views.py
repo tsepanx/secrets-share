@@ -20,26 +20,15 @@ class IndexView(generic.TemplateView):
 
 
 def detail(request, hash_id):
-    m = get_message_by_hash_id(hash_id)
-    if m:
-        context = {
-            'message': m
-        }
-        return render(request, 'secrets_share/detail.html', context)
-
-    raise Http404("No such message")
-
-
-def decrypt(request, hash_id):
     message = get_message_by_hash_id(hash_id)
 
     if not message:
         raise Http404('No such Message')
 
+    context = {'message': message}
+
     if request.method == 'GET':
-        # context = {'message_id': message.id}
-        # return render(request, 'secrets_share/decrypt.html', context)
-        return render(request, 'secrets_share/decrypt.html')
+        return render(request, 'secrets_share/detail.html', context)
 
     elif request.method == 'POST':
         password = request.POST['password']
@@ -47,16 +36,10 @@ def decrypt(request, hash_id):
         decrypted_text = encryption.decrypt(message.text, password)
 
         if not decrypted_text:
-            context = {
-                # 'message_id': message.id,
-                'error_message': 'Wrong password'
-            }
-            return render(request, 'secrets_share/decrypt.html', context)
+            context['error_message'] = 'Wrong password'
+            return render(request, 'secrets_share/detail.html', context)
 
-        context = {
-            'message': message,
-            'decrypted_text': decrypted_text
-        }
+        context['decrypted_text'] = decrypted_text
         return render(request, 'secrets_share/detail.html', context)
 
 
@@ -76,6 +59,6 @@ class SubmitView(generic.CreateView):
 
             return render(request, 'secrets_share/submit.html')
         else:
-            password = request.POST['password']  # TODO Add validation if password is empty
+            password = request.POST['password']
             message.save(password=password)
             return HttpResponseRedirect(reverse('secrets_share:detail_hash', args=(message.get_hash_id(),)))

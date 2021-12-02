@@ -11,7 +11,7 @@
 <form method="post">{% csrf_token %}
     <legend><h1>Message Form</h1></legend>
     {{ form.as_p }}
-    Password: <input type="text" name="password">
+    Password: <input type="password" name="password" required="">
     <input type="submit" value="Submit">
 </form>
 
