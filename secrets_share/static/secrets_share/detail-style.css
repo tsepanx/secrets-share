@@ -1,11 +1,11 @@
-/*body {*/
-/*    */
-/*}*/
-
 form {
     align-self: center;
 }
 
 li a {
     color: green;
+}
+
+div.message-text {
+    padding: 10px;
 }

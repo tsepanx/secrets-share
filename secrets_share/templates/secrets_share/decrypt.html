@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decrypt</title>
+</head>
+<body>
+
+<form method="post">{% csrf_token %}
+    <legend><h1>Decrypt message</h1></legend>
+    {% if error_message %}
+        <b><p>{{ error_message }}</p></b>
+    {% endif %}
+    Password: <input type="text" name="password">
+    <input type="submit" value="Decrypt">
+</form>
+</body>
+</html>

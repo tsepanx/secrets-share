@@ -70,7 +70,8 @@ def decrypt(string, password):
     decryptor = AES.new(key, AES.MODE_CBC, IV)
 
     string = decryptor.decrypt(string[AES.block_size:])
-    return unpad_string(string)
+    result = unpad_string(string)
+    return result.decode()
     # return string
 
 

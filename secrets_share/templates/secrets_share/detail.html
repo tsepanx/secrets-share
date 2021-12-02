@@ -1,17 +1,25 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index page</title>
+    <title>Message: {{ message.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'secrets_share/detail-style.css' %}">
 </head>
 <body>
 
 <a href="{% url 'secrets_share:index' %}">Go Home</a>
 
-<h3><a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">Message Permalink</a></h3>
+<p>Message Permalink: <a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">{% url 'secrets_share:detail_hash' message.get_hash_id %}</a></p>
 
-<p>Text: {{ message.text }}</p>
 <p>Date created: {{ message.submit_date }}</p>
+
+{% if not decrypted_text %}
+<p><a href="{% url 'secrets_share:decrypt' message.get_hash_id %}">Decrypt message</a></p>
+{% else %}
+    Decrypted text: <div class="message-text"><i>{{ decrypted_text }}</i></div>
+{% endif %}
 
 </body>
 </html>
