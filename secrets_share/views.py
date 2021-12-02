@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from .models import Message
+
+
+class IndexView(generic.TemplateView):
+    template_name = 'secrets_share/index.html'
+
+
+class DetailView(generic.DetailView):
+    model = Message
+    template_name = 'secrets_share/detail.html'
