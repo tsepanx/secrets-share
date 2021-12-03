@@ -15,7 +15,7 @@ class Message(models.Model):
     HASH_ID_SIZE = 8
 
     title = models.CharField(max_length=100)
-    text = models.TextField(max_length=1000)
+    text = models.TextField(max_length=10 ** 5)
     submit_date = models.DateTimeField('Date created', auto_now_add=True)
     is_encrypted = models.BooleanField(default=False)
 
@@ -42,7 +42,6 @@ class Message(models.Model):
         h.update(salt.encode())
 
         hash_string = h.hexdigest()
-
         return hash_string[:Message.HASH_ID_SIZE + 1]
 
     def get_decrypted_text(self, password):

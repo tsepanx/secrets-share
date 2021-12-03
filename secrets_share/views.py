@@ -43,8 +43,8 @@ def detail(request, hash_id):
 class SubmitForm(forms.ModelForm):
     title = forms.CharField(label='Message Title')
     text = forms.CharField(widget=forms.Textarea, label='Message Text')
-    password = forms.CharField(widget=forms.PasswordInput, label='Password')
-    # burn_after_reading = forms.BooleanField(required=False)
+    password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
+    burn_after_reading = forms.BooleanField(label='Burn after decryption', required=False)
 
     class Meta:
         model = Message
@@ -68,4 +68,5 @@ class SubmitView(generic.CreateView):
         else:
             password = request.POST['password']
             message.save(password=password)
+
             return HttpResponseRedirect(reverse('secrets_share:detail_hash', args=(message.get_hash_id(),)))

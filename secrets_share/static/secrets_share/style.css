@@ -8,4 +8,17 @@ div.message-text {
     padding: 20px;
     border: 2px solid rgb(28, 110, 164);
     border-radius: 5px;
+    white-space: pre-wrap;
+}
+
+textarea {
+    font-family: monospace;
+}
+
+input.form-input {
+    padding: .375rem .75rem;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    /*transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
 }

@@ -22,18 +22,18 @@
 
             <p>Date created: {{ message.submit_date }}</p>
 
-            {% if not decrypted_text %}
-            <form method="post">{% csrf_token %}
-                <legend><h3>Decrypt message</h3></legend>
-                {% if error_message %}
-                    <b><p>{{ error_message }}</p></b>
-                {% endif %}
-                Password: <input type="password" name="password" required="">
-                <input type="submit" value="Decrypt">
-            </form>
-            {% else %}
-                <h3>Decrypted text</h3>
+            {% if not message.is_encrypted %}
+                <div class="message-text"><code>{{ message.text }}</code></div>
+            {% elif decrypted_text %}
                 <div class="message-text"><code>{{ decrypted_text }}</code></div>
+            {% else %}
+                <form method="post">{% csrf_token %}j
+                    {% if error_message %}
+                        <b><p class="text-danger">{{ error_message }}</p></b>
+                    {% endif %}
+                    Password: <input class="form-input" type="password" name="password" required="">
+                    <input class="btn" type="submit" value="Decrypt">
+                </form>
             {% endif %}
         </div>
     </div>
