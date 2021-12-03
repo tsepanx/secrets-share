@@ -43,7 +43,7 @@ def detail(request, hash_id):
 class SubmitForm(forms.ModelForm):
     title = forms.CharField(label='Message Title')
     text = forms.CharField(widget=forms.Textarea, label='Message Text')
-    password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
+    password = forms.CharField(widget=forms.PasswordInput, label='Password')
     # burn_after_reading = forms.BooleanField(required=False)
 
     class Meta:

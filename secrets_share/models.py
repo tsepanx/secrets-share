@@ -17,7 +17,7 @@ class Message(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField(max_length=1000)
     submit_date = models.DateTimeField('Date created', auto_now_add=True)
-    is_encrypted = models.BooleanField()
+    is_encrypted = models.BooleanField(default=False)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None, **kwargs):
         password = kwargs.get('password', None)

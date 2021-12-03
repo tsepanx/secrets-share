@@ -78,7 +78,7 @@ def decrypt(string, password):
 
 
 if __name__ == "__main__":
-    a = encrypt('text', '1234')
+    a = encrypt('text', '')
     print(a)
 
     b = decrypt(a, '1234')
