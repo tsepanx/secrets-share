@@ -2,17 +2,18 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
+from django import forms
 
 from .models import Message
 from . import encryption
 
 
-def get_message_by_hash_id(hash_id):
+def get_message_by(hash_id):
     for m in Message.objects.all():
         if m.get_hash_id() == hash_id:
             return m
 
-    return None
+    raise Http404('No such Message')
 
 
 class IndexView(generic.TemplateView):
@@ -20,10 +21,7 @@ class IndexView(generic.TemplateView):
 
 
 def detail(request, hash_id):
-    message = get_message_by_hash_id(hash_id)
-
-    if not message:
-        raise Http404('No such Message')
+    message = get_message_by(hash_id)
 
     context = {'message': message}
 
@@ -32,20 +30,29 @@ def detail(request, hash_id):
 
     elif request.method == 'POST':
         password = request.POST['password']
-
         decrypted_text = encryption.decrypt(message.text, password)
 
-        if not decrypted_text:
+        if decrypted_text:
+            context['decrypted_text'] = decrypted_text
+            return render(request, 'secrets_share/detail.html', context)
+        else:
             context['error_message'] = 'Wrong password'
             return render(request, 'secrets_share/detail.html', context)
 
-        context['decrypted_text'] = decrypted_text
-        return render(request, 'secrets_share/detail.html', context)
+
+class SubmitForm(forms.ModelForm):
+    title = forms.CharField(label='Message Title')
+    text = forms.CharField(widget=forms.Textarea, label='Message Text')
+    password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
+    # burn_after_reading = forms.BooleanField(required=False)
+
+    class Meta:
+        model = Message
+        fields = ['title', 'text']
 
 
 class SubmitView(generic.CreateView):
-    model = Message
-    fields = ['title', 'text']
+    form_class = SubmitForm
     template_name = 'secrets_share/submit.html'
 
     def post(self, request, *args, **kwargs):
