@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Message: {{ message.title }}</title>
+    <title>Message</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'secrets_share/style.css' %}">
@@ -17,7 +17,6 @@
             <hr class="mt-0 mb-4">
             <a href="{% url 'secrets_share:index' %}"><h3 class="mb-5">Go Home</h3></a>
 
-            <h2>Title: {{ message.title }}</h2>
             <p>Message Permalink: <a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">{{ message.get_hash_id }}</a></p>
 
             <p>Date created: {{ message.submit_date }}</p>

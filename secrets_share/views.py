@@ -41,14 +41,13 @@ def detail(request, hash_id):
 
 
 class SubmitForm(forms.ModelForm):
-    title = forms.CharField(label='Message Title')
     text = forms.CharField(widget=forms.Textarea, label='Message Text')
     password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
-    burn_after_reading = forms.BooleanField(label='Burn after decryption', required=False)
+    # burn_after_reading = forms.BooleanField(label='Burn after decryption', required=False)
 
     class Meta:
         model = Message
-        fields = ['title', 'text']
+        fields = ['text']
 
 
 class SubmitView(generic.CreateView):
@@ -57,14 +56,11 @@ class SubmitView(generic.CreateView):
 
     def post(self, request, *args, **kwargs):
         try:
-            title = request.POST['title']
             text = request.POST['text']
 
-            message = Message(title=title, text=text)
+            message = Message(text=text)
         except Exception as e:
-            print(e)
-
-            return render(request, 'secrets_share/submit.html')
+            raise Http404(e)
         else:
             password = request.POST['password']
             message.save(password=password)

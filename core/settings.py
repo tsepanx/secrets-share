@@ -6,14 +6,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-#sr)qb=!(w$ti7$flzhibj)7p=@3@c*@+^xx3xg(3rs!a7bwi0')
-DEBUG = os.getenv('DEBUG', False) == 'True'
+# DEBUG = os.getenv('DEBUG', False) == 'True'
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'secrets_share.User'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 # Application definition
 

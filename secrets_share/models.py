@@ -14,7 +14,6 @@ class User(AbstractUser):
 class Message(models.Model):
     HASH_ID_SIZE = 8
 
-    title = models.CharField(max_length=100)
     text = models.TextField(max_length=10 ** 5)
     submit_date = models.DateTimeField('Date created', auto_now_add=True)
     is_encrypted = models.BooleanField(default=False)
@@ -48,4 +47,4 @@ class Message(models.Model):
         return decrypt(self.text, password)
 
     def __str__(self):
-        return f'{self.title}, {self.text}'
+        return f'{self.text}'
