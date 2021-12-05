@@ -27,7 +27,7 @@
             {% elif decrypted_text %}
                 <div class="message-text"><code>{{ decrypted_text }}</code></div>
             {% else %}
-                <form method="post">{% csrf_token %}j
+                <form method="post">{% csrf_token %}
                     {% if error_message %}
                         <b><p class="text-danger">{{ error_message }}</p></b>
                     {% endif %}

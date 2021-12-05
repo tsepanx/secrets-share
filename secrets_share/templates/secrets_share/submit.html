@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Submit new message</title>
+    <title>New paste</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'secrets_share/style.css' %}">
@@ -19,7 +19,7 @@
             <hr class="mt-0 mb-4">
             <a href="{% url 'secrets_share:index' %}"><h3 class="mb-5">Go Home</h3></a>
 
-            <h1 class="mt-2">Secret message</h1>
+            <h1 class="mt-2">New paste</h1>
             <hr class="mt-0 mb-4">
             <form method="post">
                 {% csrf_token %}
