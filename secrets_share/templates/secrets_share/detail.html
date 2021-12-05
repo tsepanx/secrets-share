@@ -12,10 +12,10 @@
 <body>
 
 <div class="container">
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-3">
         <div class="col-sm-8">
-            <hr class="mt-0 mb-4">
-            <a href="{% url 'secrets_share:index' %}"><h3 class="mb-5">Go Home</h3></a>
+            <hr class="mb-3">
+            {% include 'secrets_share/snippets/index_href.html' %}
 
             <p>Message Permalink: <a href="{% url 'secrets_share:detail_hash' message.get_hash_id %}">{{ message.get_hash_id }}</a></p>
 

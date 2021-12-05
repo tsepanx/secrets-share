@@ -16,10 +16,6 @@ def get_message_by(hash_id):
     raise Http404('No such Message')
 
 
-class IndexView(generic.TemplateView):
-    template_name = 'secrets_share/index.html'
-
-
 def detail(request, hash_id):
     message = get_message_by(hash_id)
 
@@ -43,7 +39,6 @@ def detail(request, hash_id):
 class SubmitForm(forms.ModelForm):
     text = forms.CharField(widget=forms.Textarea, label='Message Text')
     password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
-    # burn_after_reading = forms.BooleanField(label='Burn after decryption', required=False)
 
     class Meta:
         model = Message
@@ -52,7 +47,7 @@ class SubmitForm(forms.ModelForm):
 
 class SubmitView(generic.CreateView):
     form_class = SubmitForm
-    template_name = 'secrets_share/submit.html'
+    template_name = 'secrets_share/index.html'
 
     def post(self, request, *args, **kwargs):
         try:

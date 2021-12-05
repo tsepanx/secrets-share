@@ -1,10 +1,12 @@
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index page</title>
+    <title>New paste</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'secrets_share/style.css' %}">
@@ -12,11 +14,28 @@
 <body>
 
 <div class="container">
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center mt-3">
         <div class="col-sm-8">
-            <h1 class="mt-2">Index page</h1>
+            <hr class="mb-3">
+            <h1 class="mb-3">Index page</h1>
 
-            <a href={% url 'secrets_share:submit' %}><h3 class="mt-5">Write new paste</h3></a>
+            <p>Source code is available at: <a href="https://github.com/tsepanx/secrets-share">Github</a></p>
+            <p>This is a dead simple pastebin that implements one single feature - share encrypted messages.
+                It lets you:
+                <ul>
+                    <li>Create encrypted messages</li>
+                    <li>Share message permalink</li>
+                    <li>Decrypt messages with password</li>
+                </ul>
+            </p>
+
+            <h4 class="mt-2">New message</h4>
+            <hr class="mt-0 mb-4">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success" type="submit" value="Submit">
+            </form>
         </div>
     </div>
 </div>
