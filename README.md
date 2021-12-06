@@ -6,3 +6,7 @@ It lets you:
 - Create encrypted messages
 - Share message permalink
 - Decrypt messages with password
+
+---
+
+Running instance is available at: https://secrets-share.xyz
