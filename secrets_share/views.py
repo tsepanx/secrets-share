@@ -5,7 +5,6 @@ from django.views import generic
 
 from .forms import SubmitForm
 from .models import Message
-from . import encryption
 
 
 def get_message_by(hash_id):
@@ -26,13 +25,13 @@ def detail(request, hash_id):
 
     elif request.method == 'POST':
         password = request.POST['password']
-        decrypted_text = encryption.decrypt(message.text, password)
-
-        if decrypted_text:
-            context['decrypted_text'] = decrypted_text
+        try:
+            decrypted_text = message.get_decrypted_text(password)
+        except Exception:
+            context['error_message'] = 'Wrong password'
             return render(request, 'secrets_share/detail.html', context)
         else:
-            context['error_message'] = 'Wrong password'
+            context['decrypted_text'] = decrypted_text
             return render(request, 'secrets_share/detail.html', context)
 
 

@@ -44,7 +44,12 @@ class Message(models.Model):
         return hash_string[:Message.HASH_ID_SIZE + 1]
 
     def get_decrypted_text(self, password):
-        return decrypt(self.text, password)
+        decrypted = decrypt(self.text, password)
+
+        if decrypted == '':
+            raise Exception
+
+        return decrypted
 
     def __str__(self):
         return f'{self.text}'
