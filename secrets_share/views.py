@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
-from django import forms
 
+from .forms import SubmitForm
 from .models import Message
 from . import encryption
 
@@ -34,15 +34,6 @@ def detail(request, hash_id):
         else:
             context['error_message'] = 'Wrong password'
             return render(request, 'secrets_share/detail.html', context)
-
-
-class SubmitForm(forms.ModelForm):
-    text = forms.CharField(widget=forms.Textarea, label='Message Text')
-    password = forms.CharField(widget=forms.PasswordInput, label='Password (Optional)', required=False)
-
-    class Meta:
-        model = Message
-        fields = ['text']
 
 
 class SubmitView(generic.CreateView):
